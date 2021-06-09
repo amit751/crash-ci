@@ -16,10 +16,8 @@ services:
 
 
   jenkins:
-      image: jenkins/jenkins:lts-jdk11
+      image: nvgoldin/cyber4s-jenkins
       ports:
         - "3001:8080"
         - "4033:50000"
-
-
 
