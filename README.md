@@ -13,11 +13,11 @@ docker-compose pull
 ```
 
 
-### Execute our very simple unit tests
+### Execute the dummy unit test
 ```shell
 cd crash-ci/app
 npm install
-npm itest
+npm test
 ```
 
 Output should be similar to:
@@ -37,11 +37,11 @@ Output should be similar to:
 ```
 
 ### First task!
-* Find addTwoNumbers function
-* Renmame it to "addTwoNumbers<YourName>"
+* Find ``addTwoNumbers`` function
+* Renmame it to ``addTwoNumbers<YourName>``
 * Run the unit tests, see they failed and rerun them again until they pass (by fixing the name).
-* Commit your code
-  * `git commit -m 'Added <MyName> to this test'
+* Commit your code:
+  ```git commit -m 'Added <MyName> to this test'```
   
 
 
@@ -60,13 +60,14 @@ docker-compose -d up
 ```
 
 Now go to http://localhost:3000/ and setup Gogs:
-* Use SQLite as the selected DB
-* Under admin account setting :
-    * pick adminadmin/adminadmin as username/password
+* Pick SQLite as the selected DB
+* Scroll down to "Admin account settings":
+    * Type `adminadmin` and `adminadmin` as password. 
     * email doesn't matter
+* No need to touch anything else
 * click "Install Gogs"
 
-Next setup a new repository named "crash-ci" under the "+" sign in "My Repositories", click "save".
+* Setup a new repository named "crash-ci" by pressing "+" sign in "My Repositories", click "save".
 
 Now, lets push this repository to the new Git server - back to the terminal type:
 ```shell
@@ -78,7 +79,7 @@ Then push the code to our newly created remote:
 git push local
 ```
 
-Back to your browser refresh http://localhost:3000/adminadmin/crash-ci, you should see our repository in there, cool uh?
+Back to your browser refresh http://localhost:3000/adminadmin/crash-ci, you should see our repository in there. cool uh?
 
 Now we got our Git server up and running, lets move to Jenkins!
 
@@ -127,7 +128,40 @@ found 0 vulnerabilities
 Finished: SUCCESS
 ```
  
+### Lets trigger automatically!
+We're going to configure webhooks so we can trigger Jenkins build automatically on Push events.
+  
+* Browse to http://adminadmin:adminadmin@localhost:3000/adminadmin/crash-ci/settings/hooks/gogs/new
+  * Under Payload URL:
+    * ``http://jenkins:8080/gogs-webhook/?job=my-app-pipeline``
+  * Hit save, if you get ["invalid csrf token"](https://github.com/gogs/gogs/issues/715) refresh the page and try again
+  
+ 
+### Lets test em together!
+* Edit `my-math-lib.js` and BREAK the function, for example replace `+` with `*`:
+  
+ ```javascript
+    function addTwoNumbers(x, y) {
+      return x * y;
+    }
+    module.exports = addTwoNumbers;
+ ```
+* Commit your code:
+  ```shell
+    git add my-math-lib.js
+    git commit -m 'A brand new bug!`
+  ```
+* Push it:
+  ```shell
+    git push local
+  ```
+Now comes the magic, go back to Jenkins at http://localhost:3001/job/my-app-pipeline, and find your broken build
+Task: fix it, push again, see your build passes!
 
+  
+  
+  
 
+  
 
 
