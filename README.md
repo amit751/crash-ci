@@ -56,7 +56,7 @@ Spin it up via docker-compose:
 
 ```shell
 cd crash-ci
-docker-compose -d up
+docker-compose up -d
 ```
 
 Now go to http://localhost:3000/ and setup Gogs:
