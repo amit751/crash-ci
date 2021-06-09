@@ -1,4 +1,4 @@
-# crash-ci
+# crash-ci :hammer_and_wrench:	 
 
 ### Clone this repository
 ```shell
@@ -6,14 +6,14 @@ git clone https://github.com/nvgoldin/crash-ci.git
 ```
 
 
-### Pull the images (will speed up things later)
+### Pull the images (will speed up things later) :key:	 
 ```shell
 cd crash-ci
 docker-compose pull
 ```
 
 
-### Execute the dummy unit test
+### Execute the dummy unit test :test_tube:	
 ```shell
 cd crash-ci/app
 npm install
@@ -36,7 +36,7 @@ Output should be similar to:
 
 ```
 
-### First task!
+### First task! :drum: 
 * Find ``addTwoNumbers`` function
 * Renmame it to ``addTwoNumbers<YourName>``
 * Run the unit tests, see they failed and rerun them again until they pass (by fixing the name).
@@ -46,9 +46,9 @@ Output should be similar to:
 
 
 
-## CI setup
+## CI setup :printer: 
 
-### Setup Gogs
+### Setup Gogs :movie_camera:	
 
 [Gogs](https://gogs.io/) is a simple git server - we are going to run it locally.
 
@@ -79,11 +79,11 @@ Then push the code to our newly created remote:
 git push local
 ```
 
-Back to your browser refresh http://localhost:3000/adminadmin/crash-ci, you should see our repository in there. cool uh?
+Back to your browser refresh http://localhost:3000/adminadmin/crash-ci, you should see our repository in there. cool uh? :cool:	
 
 Now we got our Git server up and running, lets move to Jenkins!
 
-### Jenkins
+### Jenkins :gear:	
 
 * Log into http://localhost:3001/ 
 * Click "New item" -> select **Freestyle project** and name it "my-app-pipeline".
@@ -137,7 +137,7 @@ We're going to configure webhooks so we can trigger Jenkins build automatically 
   * Hit save, if you get ["invalid csrf token"](https://github.com/gogs/gogs/issues/715) refresh the page and try again
   
  
-### Lets test em together!
+### Lets test em together! :saxophone:	:drum: :saxophone: 
 * Edit `my-math-lib.js` and BREAK the function, for example replace `+` with `*`:
   
  ```javascript
