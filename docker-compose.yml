@@ -1,0 +1,25 @@
+version: '3'
+services:
+
+  gogs:
+      image: fabric8/gogs
+      ports:
+        - "4022:22"
+        - "3000:3000"
+
+      environment:
+        - ADMIN_USER_CREATE=true
+        - ADMIN_USER_NAME=gogsadmin
+        - ADMIN_USER_PASSWORD=adminadmin
+        - ADMIN_USER_EMAIL=admin@admin.com
+        - DOMAIN=localhost
+
+
+  jenkins:
+      image: jenkins/jenkins:lts-jdk11
+      ports:
+        - "3001:8080"
+        - "4033:50000"
+
+
+
