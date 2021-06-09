@@ -2,11 +2,12 @@ version: '3'
 services:
 
   gogs:
-      image: fabric8/gogs
+      image: gogs/gogs
       ports:
         - "4022:22"
         - "3000:3000"
-
+      volumes:
+        - gogs_data:/data
       environment:
         - ADMIN_USER_CREATE=true
         - ADMIN_USER_NAME=gogsadmin
@@ -17,7 +18,12 @@ services:
 
   jenkins:
       image: nvgoldin/cyber4s-jenkins
+      volumes:
+        - jenkins_data:/var/jenkins_home
       ports:
         - "3001:8080"
         - "4033:50000"
 
+volumes:
+  jenkins_data:
+  gogs_data:
